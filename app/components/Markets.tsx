@@ -20,7 +20,9 @@ export const Markets = () => {
         <div className="flex flex-col w-full rounded-lg bg-baseBackgroundL1 px-5 py-3">
           <table className="w-full table-auto">
             <MarketHeader />
-            {sortedTickers?.map((m) => <MarketRow market={m} />)}
+            {sortedTickers?.map((m) => (
+              <MarketRow key={m.symbol} market={m} />
+            ))}
           </table>
         </div>
       </div>
@@ -75,10 +77,9 @@ function MarketRow({ market }: { market: Ticker }) {
         <p className="text-base font-medium tabular-nums">{market.volume}</p>
       </td>
       <td className="px-1 py-3">
-      <p className={`text-base font-medium tabular-nums ${Number(market.priceChangePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
+        <p className={`text-base font-medium tabular-nums ${Number(market.priceChangePercent) < 0 ? 'text-red-500' : 'text-green-500'}`}>
             {Number(market.priceChangePercent)?.toFixed(3)} %
         </p>
-
       </td> 
     </tr>
   );
